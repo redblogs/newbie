@@ -3,7 +3,7 @@
 
 def wirteFile(filename,tmp):
 	with open(filename,'a+') as writef:
-		writef.writelines(tmp)
+		writef.writelines('%s\n' %tmp )
 	return " 注 册 成 功 "
 
 def readUser(filename):
