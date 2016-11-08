@@ -20,3 +20,50 @@
 
 	4.持久化(程序关闭后再次执行仍然可以读取,用户名仍可以使用)
 
+* 函数中return值可以根据情况进行调整：
+
+		In [6]: def hello(string):
+		   ...:     if string in 'hello':
+		   ...:         print string
+		   ...:         return 'True'
+		   ...:     else :
+		   ...:         print 'Not in '
+		   ...:         return 'False'
+		   ...:         
+		   ...:       
+		   ...:     
+
+		In [7]: t = hello('h')
+		h
+
+		In [8]: print t 
+		True
+
+		In [9]: t = hello('s')
+		Not in 
+
+		In [10]: print t 
+		False
+
+* 函数中return值可以放在break前边:
+
+		In [15]: def phone(tmp = 5):
+			...:     while True:
+			...:         print "The values of tmp is %s " %tmp 
+			...:         tmp -= 1
+			...:         if tmp == 2 :
+			...:             print tmp
+			...:             return tmp
+			...:             break
+			...:     
+
+		In [17]: t = phone()
+		The values of tmp is 5 
+		The values of tmp is 4 
+		The values of tmp is 3 
+		2
+
+		In [18]: print t 
+		2
+
+		In [19]: 
