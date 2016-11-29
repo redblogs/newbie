@@ -1,0 +1,19 @@
+<table border='1'>
+	<thead>
+	<tr>
+		<th>Name</th>
+		<th>Password</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	{% for tmp  in arr %}
+	{% if  len(tmp) ==  2 %}
+	<tr>
+		<td>{{ k }}</td>
+		<td>{{ v }}</td>
+	</tr>
+	{% endif %}
+	{% endfor %}
+	</tbody>
+</table>
