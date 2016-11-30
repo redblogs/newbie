@@ -1,3 +1,5 @@
+<!----arr = [['AA', '123'], ['BB', '32'], ['cc', '1231'], ['kk', '33'], ['AA1', '11'], ['tt', '12'], ['woniu', '11'], ['NULL', 'NULL'], ['Bob', '123'], ['Bib', 'aaa'], ['qqq', 'aaa'], ['gg', 'aa'], ['']]---->
+
 <table border='1'>
 	<thead>
 	<tr>
@@ -8,10 +10,10 @@
 
 	<tbody>
 	{% for tmp  in arr %}
-	{% if  len(tmp) ==  2 %}
+	{% if tmp[0]  and  tmp[1] %}
 	<tr>
-		<td>{{ k }}</td>
-		<td>{{ v }}</td>
+		<td>{{ tmp[0] }}</td>
+		<td>{{ tmp[1] }}</td>
 	</tr>
 	{% endif %}
 	{% endfor %}
