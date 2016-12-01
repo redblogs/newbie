@@ -1,0 +1,21 @@
+<html>
+<table border='1'>
+	<thead>
+		<tr><th>Name</th><th>Password</th></tr>
+	</thead>
+	<tbody>
+		{% for k , v in arr.items()%}
+		<tr><td>{{ k }} </td><td>{{ v }}</td></tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+<div>
+	<form  action='/adduser'>
+	Name:<input type='text' name='name'>
+	Password:<input type='password' name='password'>
+	<input type='submit' value='add'>
+	</form>
+<div>
+<p>{{ msg }}</p>
+</html>
