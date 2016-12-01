@@ -59,8 +59,12 @@ def delete():
 	tmp = getUsers('users.txt')
 	if delname in tmp:
 		tmp.pop(delname)
+		#以w模式清空下文件,以免重写文件出现覆盖现象
+		tmpf = open('users.txt','w')
+		tmpf.close()
 		for x in tmp.items():
-			updateFile('users.txt','w', x)
+			print x
+			updateFile('users.txt','a+', x[0],x[1])
 		errmsg = "Delete success"
 		return render_template("userlist.html",arr = tmp ,msg = errmsg)
 	else :
