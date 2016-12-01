@@ -2,7 +2,7 @@
 #coding:utf-8
 
 from flask import Flask ,request,redirect,render_template
-from datas import getUsers
+from datas import getUsers,updateFile
 app = Flask(__name__)
 
 @app.route('/')
@@ -46,11 +46,10 @@ def adduser():
 	if (not password ) :
 		errmsg = "password wrong"
 		return render_template('adduser.html',arr = tmp ,msg=errmsg)
-	with open('users.txt','a+') as f:
-		f.write('%s:%s\n' %(name,password) )
-		errmsg = "Adduser sucess"
-		tmp[name] = password
-		return render_template('adduser.html',arr = tmp ,msg=errmsg)
+	updateFile('users.txt','a+',name,password)
+	errmsg = "Adduser sucess"
+	tmp[name] = password
+	return render_template('adduser.html',arr = tmp ,msg=errmsg)
 		
 
 @app.route('/del')
@@ -60,9 +59,8 @@ def delete():
 	tmp = getUsers('users.txt')
 	if delname in tmp:
 		tmp.pop(delname)
-		with open("users.txt",'w') as f:
-			for k,v in tmp.items():
-				f.write("%s:%s\n" %(k,v))
+		for x in tmp.items():
+			updateFile('users.txt','w', x)
 		errmsg = "Delete success"
 		return render_template("userlist.html",arr = tmp ,msg = errmsg)
 	else :

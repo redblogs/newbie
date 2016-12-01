@@ -3,9 +3,12 @@ def getUsers(filename):
 		arr =[line.split(':') for line in  f.read().split('\n') if line != '']
 		#print arr
 		res = dict((x[0],x[1]) for x in arr )
-		return res
-
+	return res
+def updateFile(filename,mode ,*tmp):
+	with open(filename,mode) as f:
+		f.write("%s:%s\n" %tmp)
+	return "update ok"
 
 if __name__ == '__main__':
-	result = getUsers("users.txt")
-	print result
+	te = updateFile('users.txt','a+','qq','123')
+	print te
