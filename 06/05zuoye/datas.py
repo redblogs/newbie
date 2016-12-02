@@ -10,6 +10,4 @@ def updateFile(filename,mode ,*tmp):
 	return "update ok"
 
 if __name__ == '__main__':
-	x = ('TT', '123')
-	te = updateFile('users.txt','a+',*x)
-	print te
+	print  getUsers('users.txt')
