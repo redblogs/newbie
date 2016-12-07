@@ -2,7 +2,7 @@
 <p>userlist</p>
 <table border='1px'>
 	<thead>
-	<tr><th>ID</th><th>Name</th>
+	<tr><th>Name</th>
 	<th>Name_CN</th>
 	<th>Email</th>
 	<th>Mobile</th>
@@ -13,7 +13,7 @@
 	</thead>
 	<tbody>
 	{% for user in users %}
-	<tr><th>{{ user.id }}</th><td>{{ user.name}}</td>
+	<tr><input type='hidden' name='id' value={{ user.id }}><td>{{ user.name}}</td>
 	<td>{{user.name_cn}}</td>
 	<td>{{user.email}}</td>
 	<td>{{user.mobile}}</td>
