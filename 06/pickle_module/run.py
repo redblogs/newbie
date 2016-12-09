@@ -2,31 +2,36 @@
 #coding:utf-8
 
 from flask import Flask ,request,redirect,render_template
-from datas import getUsers,updateFile
+from datas import *
 app = Flask(__name__)
 
-@app.route('/')
 def index():
 	return "Please login "
 
-@app.route('/login')
+@app.route('/')
+@app.route('/login',methods=['GET','POST'])
 def login():
-	print request.method
-	name = request.args.get('name','')
-	password = request.args.get('password','')
-	arr = request.form
-	#tmp = dict((x[0],x[1]) for x in arr)
-	users =getUsers('users.txt')
-	if (not name) or (name not in users):
-		errmsg = "name wrong"
-		return render_template('login.html',errmsg=errmsg)
-	else :
-		if (not password ) or (password != users[name]):
-			errmsg =  "password wrong"
+	if request.method == 'POST':
+		print request.method
+		name = request.form.get('name','')
+		password = request.form.get('password','')
+		arr = request.form
+		print "*" * 40 
+		print name ,password ,arr
+		print "*" * 40 
+		#tmp = dict((x[0],x[1]) for x in arr)
+		users =getUsers('users.txt')
+		if (not name) or (name not in users):
+			errmsg = "name wrong"
 			return render_template('login.html',errmsg=errmsg)
-		else:
-			mes =  "login Success"
-			return redirect('/userlist')
+		else :
+			if (not password ) or (password != users[name]):
+				errmsg =  "password wrong"
+				return render_template('login.html',errmsg=errmsg)
+			else:
+				mes =  "login Success"
+				return redirect('/userlist')
+	return render_template('login.html')
 
 @app.route('/userlist')
 def userlist():
