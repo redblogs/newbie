@@ -15,8 +15,10 @@ import time
 
 ##获取数据库中所有的用户数据
 def getUsers(tbName):
+	db = mysql.connect(user='root',passwd='123456',host='127.0.0.1' ,db='reboot',charset='utf8')
+	cur =  db.cursor()
 	users = []
-	fields = ['id' ,'name' , 'name_cn','email','mobile']
+	fields = ['id' ,'name' , 'name_cn','email','mobile','status','role','create_time']
 	sql = 'select %s from %s' %(','.join(fields),tbName)
 	#print sql
 	cur.execute(sql)
@@ -31,6 +33,8 @@ def getUsers(tbName):
 ##查询指定用户的所有数据
 
 def getOne(tbName,name):
+	db = mysql.connect(user='root',passwd='123456',host='127.0.0.1' ,db='reboot',charset='utf8')
+	cur =  db.cursor()
 	user = {}
 	fields = ['id' ,'name' , 'name_cn','email','mobile']
 	sql = "select %s from %s where name='%s' " %(','.join(fields),tbName,name)
@@ -47,7 +51,8 @@ def getOne(tbName,name):
 
 ##改,参数中user为字典
 def updateMes(tbName,user):
-
+	db = mysql.connect(user='root',passwd='123456',host='127.0.0.1' ,db='reboot',charset='utf8')
+	cur =  db.cursor()
 	#user = {'mobile': '1324134', 'email': 'RR@china.com', 'name_cn': 'RR', 'id': '1', 'name': 'RR'}
 	tmp = []
 	u_id = user['id']
@@ -65,6 +70,8 @@ def updateMes(tbName,user):
 ##增,参数中user为字典
 #user = {'name':'Xman','name_cn':'Xman','password':'123as','email':'Xman@chinacache.com','mobile':'123213','role':'user','status':0,'create_time':'%s' %(time.strftime("%Y %H:%M:%S"))}
 def addUser(tbName,user):
+	db = mysql.connect(user='root',passwd='123456',host='127.0.0.1' ,db='reboot',charset='utf8')
+	cur =  db.cursor()
 	#insert 语句模板 "insert into users(name,name_cn,password,email,mobile,role,status,create_time) values ('ss','ss','ss123 ','ss@chinacache.com','ssss','user','0','%s') " %(time.strftime("%Y %H:%M:%S"))
 	#利用元素直接格式化字符串,用来新增一条数据
 	fields = ['name','name_cn','password','email','mobile','role','status','create_time']
@@ -88,6 +95,8 @@ def addUser(tbName,user):
 ##删,判断删除的数据是否存在;存在则删除,不存在则返回报错
 #eg:delete from users where id=3;
 def delUser(tbName,u_id):
+	db = mysql.connect(user='root',passwd='123456',host='127.0.0.1' ,db='reboot',charset='utf8')
+	cur =  db.cursor()
 	sql = "DELETE FROM %s where id='%s'" %(tbName,u_id)
         print sql
         res = cur.execute(sql)
@@ -106,7 +115,8 @@ if  __name__ == "__main__":
 	#print getOne('users','TT')
 	#user = {'mobile': '18614079263', 'email': '21KK@china.com', 'name_cn': 'Kk', 'id': '1', 'name': 'KK'}
 	#print updateMes('users',user)
-	user = {'name':'Xman','name_cn':'Xman','password':'123as','email':'Xman@chinacache.com','mobile':'123213','role':'user','status':0,'create_time':'%s' %(time.strftime("%Y %H:%M:%S"))}
+	#user = {'name':'Xman','name_cn':'Xman','password':'123as','email':'Xman@chinacache.com','mobile':'123213','role':'user','status':0,'create_time':'%s' %(time.strftime("%Y %H:%M:%S"))}
+	user = {'status': 0, 'create_time': '2016 10:33:50', 'role': 'admin', 'name': 'AA', 'mobile': '123213', 'password': '123AA', 'name_cn': 'AA', 'email': 'AA@chinacache.com'}
 	print addUser('users',user)
 	#print delUser('users','5')
 	#print delUser('users','8')
