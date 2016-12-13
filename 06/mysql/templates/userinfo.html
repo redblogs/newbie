@@ -1,0 +1,32 @@
+<!--userinfo-->
+<html>
+	<form action='/update' method='POST'>
+	<table>
+		<tr>
+			<td><input type='hidden' name='id' value={{user.id}}></td>
+		</tr>
+		<tr>
+			<td>Name<input type='text' name='name' value={{user.name}}></td>
+		</tr>
+		<tr>
+			<td>Name_cn<input type='text' name='name_cn' value={{user.name_cn}}></td>
+                </tr>
+                <tr>
+			<td>email<input type='text' name='email' value={{user.email}}></td>
+                </tr>
+                <tr>
+			<td>mobile<input type='text' name='mobile' value={{user.mobile}}></td>
+                </tr>
+                <tr>
+			<td>role<input type='text' name='role' value={{user.role}}></td>
+                </tr>
+                <tr>
+			{% if user.status == 0 %}
+			<td>status<input type='text' name='status' value="unlock"></td>
+			{% else %}
+			<td>status<input type='text' name='status' value="lock"></td>
+			{% endif %}
+			<td><input type='submit' value='ok'></td>
+		</tr></table>
+	</form>
+</html>

@@ -32,18 +32,17 @@ def getUsers(tbName):
 
 ##查询指定用户的所有数据
 
-def getOne(tbName,name):
+def getOne(tbName,u_id):
 	db = mysql.connect(user='root',passwd='123456',host='127.0.0.1' ,db='reboot',charset='utf8')
 	cur =  db.cursor()
 	user = {}
-	fields = ['id' ,'name' , 'name_cn','email','mobile']
-	sql = "select %s from %s where name='%s' " %(','.join(fields),tbName,name)
+	fields = ['id' ,'name' , 'name_cn','email','mobile','role','status']
+	sql = "select %s from %s where id='%s' " %(','.join(fields),tbName,u_id)
 	#查询name存在,tmp=1;不存在,tmp=0
 	tmp = cur.execute(sql)
 	#name存在的情况下执行,即tmp=1 
 	if tmp:
 		res = cur.fetchone()
-		print res
 		for  k ,v in enumerate(fields):
 			user[v] = res[k]
 		return user
@@ -108,15 +107,15 @@ def delUser(tbName,u_id):
 	return "The id is not exist"
 
 if  __name__ == "__main__":
-	db = mysql.connect(user='root',passwd='123456',host='127.0.0.1' ,db='reboot',charset='utf8')
-	cur =  db.cursor()
+	#db = mysql.connect(user='root',passwd='123456',host='127.0.0.1' ,db='reboot',charset='utf8')
+	#cur =  db.cursor()
 	#print getUsers('users')
-	#print getOne('users','ll')
+	print getOne('users',1)
 	#print getOne('users','TT')
 	#user = {'mobile': '18614079263', 'email': '21KK@china.com', 'name_cn': 'Kk', 'id': '1', 'name': 'KK'}
 	#print updateMes('users',user)
 	#user = {'name':'Xman','name_cn':'Xman','password':'123as','email':'Xman@chinacache.com','mobile':'123213','role':'user','status':0,'create_time':'%s' %(time.strftime("%Y %H:%M:%S"))}
-	user = {'status': 0, 'create_time': '2016 10:33:50', 'role': 'admin', 'name': 'AA', 'mobile': '123213', 'password': '123AA', 'name_cn': 'AA', 'email': 'AA@chinacache.com'}
-	print addUser('users',user)
+	#user = {'status': 0, 'create_time': '2016 10:33:50', 'role': 'admin', 'name': 'AA', 'mobile': '123213', 'password': '123AA', 'name_cn': 'AA', 'email': 'AA@chinacache.com'}
+	#print addUser('users',user)
 	#print delUser('users','5')
 	#print delUser('users','8')

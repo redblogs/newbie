@@ -11,4 +11,7 @@
 	更改数据基本都是通过id号来更改的sql = 'update %s set %s where id="%s"' %(tbName,','.join(tmp),u_id)
 	
 	删除数据也是通过id号来删除的 sql = "DELETE FROM %s where id='%s'" %(tbName,u_id)
+
 ##run.py为程序的执行入口
+
+##在html中更新数据的话可以通过将u_id隐藏,这样使用POST方法可以直接获取所有数据后根据u_id来更新
