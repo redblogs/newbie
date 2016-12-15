@@ -17,17 +17,17 @@ import datetime
 def getUsers(tbName):
 	db = mysql.connect(user='root',passwd='123456',host='127.0.0.1' ,db='reboot',charset='utf8')
 	cur =  db.cursor()
-	users = []
 	fields = ['id' ,'name' , 'name_cn','email','mobile','status','role','create_time']
 	sql = 'select %s from %s' %(','.join(fields),tbName)
 	#print sql
 	cur.execute(sql)
 	res = cur.fetchall()
-	for row in res :
-		user = {}
-		for k ,v in enumerate(fields):
-			user[v] = row[k]
-		users.append(user)
+	users = [ dict((v,row[k]) for k ,v in enumerate(fields)) for row in res]
+	#for row in res :
+	#	user = {}
+	#	for k ,v in enumerate(fields):
+	#		user[v] = row[k]
+	#	users.append(user)
 	return users
 
 ##查询指定用户的所有数据
@@ -43,8 +43,10 @@ def getOne(tbName,u_id):
 	#name存在的情况下执行,即tmp=1 
 	if tmp:
 		res = cur.fetchone()
-		for  k ,v in enumerate(fields):
-			user[v] = res[k]
+		#字典生成式代替简单的for遍历赋值
+		user = dict((v,res[k]) for k ,v in enumerate(fields))
+		#for  k ,v in enumerate(fields):
+		#	user[v] = res[k]
 		return user
 	return "The select user is not exists"
 
@@ -59,7 +61,7 @@ def updateMes(tbName,user):
 	for k ,v in user.items():
 		tmp.append("%s='%s'" %(k,v))
 	sql = 'update %s set %s where id="%s"' %(tbName,','.join(tmp),u_id)
-	#print sql
+	print sql
 	cur.execute(sql)
 	db.commit()
 	cur.close()
@@ -108,16 +110,19 @@ def delUser(tbName,u_id):
 #更改密码的函数,线上业务都是将密码单独出来的
 def modifyPasswd(tbName,temp):
 	##temp = {'newpassword': 'aa', 'oldpassword': 'aa', 'id': '1'}
-	print temp['id'] 
+	temp['id'] = int(temp['id'])
+	print temp
 	db = mysql.connect(user='root',passwd='123456',host='127.0.0.1' ,db='reboot',charset='utf8')
 	cur =  db.cursor()
 	alluser = getUsers('users') 
 	user = getOne('users',temp['id'])
 	tmp = [ x['id'] for x in alluser ]
+	print "tmp " *5 
+	print tmp
 	if temp['id'] not in tmp:
 		errmsg = "The user is not exist"
 		return errmsg
-	if temp['oldpassword'] !=  user['password']:
+	if (not temp['newpassword']) or ( temp['oldpassword'] !=  user['password']):
 		errmsg = "Oldpassword Wrong! "
 		return errmsg
 	sql = "update %s set password = '%s' where id = %s" %(tbName,temp['newpassword'],temp['id'])
@@ -129,5 +134,4 @@ def modifyPasswd(tbName,temp):
 	return "Change Password  Success"
 
 if  __name__ == "__main__":
-	temp = {'newpassword': 'aa', 'oldpassword': '123456', 'id': 1}
-	print modifyPasswd('users',temp)
+	print getOne('users',2)
