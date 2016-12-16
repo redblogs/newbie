@@ -1,0 +1,30 @@
+<!--adduser-->
+<html>
+	<form action='/update' method='POST'>
+	<table>
+		<td> <input type='hidden' name='id' value={{user.id}}></td>
+		<tr>
+			<td>Name<input type='text' name='name' value={{user.name}}></td>
+		</tr>
+		<tr>
+			<td>Name_cn<input type='text' name='name_cn' value={{user.name_cn}}></td>
+                </tr>
+                <tr>
+			<td>email<input type='text' name='email' value={{user.email}}></td>
+                </tr>
+                <tr>
+			<td>mobile<input type='text' name='mobile' value={{user.mobile}}></td>
+                </tr>
+                <tr>
+			<td>role<select name='role' id='role'>
+			<option value="admin">管理员</option>
+			<option value="user">普通用户</option>
+			<option value="sa">运维</option>
+			</td>
+                </tr>
+                <tr>
+			<td>status<input type='radio' name='status' value='unlock'>正常<input type='radio' name='status' value='lock'>锁定</td>
+			<td><input type='submit' value='ok'></td>
+		</tr></table>
+	</form>
+</html>
