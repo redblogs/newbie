@@ -53,18 +53,17 @@ def login():
 		else :
 
 			password = [ x['password'] for x in all_user if x['name'] == data['name']][0]
-			if  data.get('password',None) != password:
-        	                errmsg = "Password is not exist "
-                	        #return render_template("login.html",result = errmsg)
-				return json.dumps({'code':1,'result': errmsg})
-			#return render_template("login.html",result = 'login Success')
-			else:
+			if  data.get('password',None) ==  password:
 				session['name'] = data['name']
 				#加入session['role']进行权限控制
 				session['role'] = [ x['role'] for x in all_user if x['name'] == data['name']][0]
 				#return redirect('/user/userlist')
 				print session['name'] ,session['role']
 				return json.dumps({'code':0,'result': "login success "})
+			else:
+        	    		errmsg = "Password is not exist "
+                		#return render_template("login.html",result = errmsg)
+				return json.dumps({'code':1,'result': errmsg})
 
 
 @app.route('/user/userinfo',methods=['GET','POST'])
