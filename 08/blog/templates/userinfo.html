@@ -1,0 +1,43 @@
+<html>
+<p>userinfo</p>
+<form action="/user/update" method="POST">
+	<table>
+    <tr>
+		<td><input type="hidden" name='id' value={{user.id}} ></td>
+    </tr>
+    <tr>
+		<td>Name<input type='text' name='name' value={{user.name}}></td>
+    </tr>
+    <tr>
+    	<td>Name_CN<input type='text' name='name_cn' value ={{user.name_cn}}></td>
+    </tr>
+    <tr>
+    	<td>Email<input type='text' name='email' value={{user.email}}></td>
+    </tr>
+    <tr>
+   	 	<td>Mobile<input type='text' name='mobile' value={{user.mobile}}></td>
+    </tr>
+    <tr>
+    	<td>Role<select name='role' id='role'>
+				{% if user.role == "admin" %}
+				<option value = 'admin'>管理员</option>
+				{% elif user.role == "sa" %}
+				<option value = 'sa'>运 维</option>
+				{% else %}
+				<option value = 'user'>普通用户</option>
+				{% endif %}
+				</select>
+		</td>
+    </tr>
+    <tr>
+    	<td>status<select name='status' id='status'>
+				{% if user.status == 0 %}
+				<option value = 0>正常</option>
+				{% else %}
+				<option value = 1>锁定</option>
+				{% endif %}
+				</select>
+    </tr>
+	<tr><input type="submit" value='确认修改'></td></tr>
+</form>
+</html>
