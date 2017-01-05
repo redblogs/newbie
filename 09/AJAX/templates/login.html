@@ -1,0 +1,45 @@
+<html>
+<head>
+<meta charset='utf-8'>
+<title>login</title>
+</head>
+<body>
+<table>
+<!--<form action='/login' method="POST">-->
+<form id="loginForm">
+	<tr><td>Name<input id ="name"  type='text' name='name'> </td></tr>
+	<tr><td>Password<input id ="password" type='password' name='password'> </td></tr>
+	<tr><td><input id ="loginbtn" type='submit' value='login'></td></tr>
+	</form>
+	{% if result %}
+	<div style = "color:red">
+	{{ result }}
+	</div>
+	{% endif %}
+<script src = "/static/js/jquery-3.1.0.min.js"></script>
+<script>
+//alert('di yi ge jQuery') <!--Test jQuery-->
+$('#loginbtn').on('click',function(){
+	var str = $('#loginForm').serialize()
+	console.log(str)
+	$.post('/login',str,function(data){
+		console.log(data)
+		data = JSON.parse(data)
+		console.log(data)
+		if (data['code'] == 0){
+			alert(data['result'])
+			location.href='/user/userlist'
+		}else{
+			//$('errmsg').html(data['errmsg'])
+			alert(data['result'])
+			location.href='/login'
+		}
+	})
+	return  false 
+
+})
+
+</script>
+</body>
+</table>
+

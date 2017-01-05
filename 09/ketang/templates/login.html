@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 登录 | Test</title>
+    <link rel="shortcut icon" href="/static/img/facio.ico" type="image/x-icon">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/static/css/animate.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            <div>
+                <h1 class="logo-name"><img src="/static/img/logo.png"></h1>
+            </div><!--end for h1-->
+            
+            <h2>Welcome to System</h2>
+		<table>
+		<form id="loginForm">
+       	 	    <div class="form-group">
+                    <input type="text" name="name" class="form-control" placeholder="Username" required="length[6~50]">
+                    </div>
+                    <div class="form-group">
+                    <input type="password" name="password" class="form-control" placeholder="Password" required="">
+                    </div>
+                    <button type="submit" id='loginbtn' class="btn btn-primary block full-width m-b">Login</button>
+		</form><!--end for loginForm-->
+		</table>
+                <a href="#"><small>用户:admin &nbsp;&nbsp;&nbsp;&nbsp;密码:admin</small></a>
+            <p class="m-t"> <small><b>Copyright</b> Jumpserver.org Organization © 2014-2015</small> </p>
+       	 </div>
+    </div>
+
+</body>
+    <!-- Mainly scripts -->
+<script src="/static/js/jquery-2.1.1.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src = "/static/js/jquery-3.1.0.min.js"></script>
+<script>
+//alert('di yi ge jQuery') <!--Test jQuery-->
+$('#loginbtn').on('click',function(){
+        var str = $('#loginForm').serialize()
+        console.log(str)
+        $.post('/login',str,function(data){
+                console.log(data)
+                data = JSON.parse(data)
+                console.log(data)
+                if (data['code'] == 0){
+                        alert(data['result'])
+                        location.href='/'
+                }else{
+                        //$('errmsg').html(data['errmsg'])
+                        alert(data['result'])
+                        location.href='/login'
+                }
+        })
+        return  false
+
+})
+
+</script>
+
+</html>
+

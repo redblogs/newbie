@@ -1,0 +1,28 @@
+<div id='divtest'> divtest </div>
+<div id='div1'> </div>
+<div id='div2'></div>
+<button id='okbtn' type='button' data-id='1'>click me</button>
+<p class='reboot'>33333</p>
+<p class='reboot'>33333</p>
+<p class='reboot'>33333</p>
+<p class='reboot'>33333</p>
+<p class='reboot'>33333</p>
+<p class='reboot'>33333</p>
+<p class='reboot'>33333</p>
+<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
+<script>
+alert($('#divtest').html())
+$('#div1').html('nihao div1')
+
+$('button').dblclick(function(){
+	$('#div2').html($('#divtest').html())
+	$('.reboot').css('color','red')
+	$('p').css('color','black')
+	$('div').css('color','red')
+	$('p,div').css('color','blue')
+})
+$('#div1').css('color','blue');
+$('#div2').css('color','red');
+
+</script>
+

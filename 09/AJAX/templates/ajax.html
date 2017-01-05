@@ -1,0 +1,52 @@
+<html>
+<body>
+<div id='test'> 
+<table border='1px' id='utable'>
+<thead>
+<tr><th>Name</th><th>Age</th><th>Option</th></tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<form id="loginForm">
+        <tr><td>Name<input id ="name"  type='text' name='name'> </td></tr>
+        <tr><td>Password<input id ="password" type='password' name='password'> </td></tr>
+        <tr><td><input id ="loginbtn" type='submit' value='login'></td></tr>
+</form>
+</body>
+<script src='/static/js/jquery-3.1.0.min.js'></script>
+<script>
+$.getJSON('/list',function(data){
+	console.log(data)//{'code':0,'result':{'age': 18, 'id': 1, 'name': 'test'}
+
+	if (data['code'] == 0){
+		var str = ""
+		data = data['result'] 
+		str = "<tr>"+ 
+			'<td>' +  data['name'] + '</td>' +
+			'<td>' + data['age'] + '</td>' +
+			'<td>' + '<button id="updatebtn" data-id="' +  data['id'] + '">更新</button>' + '</td>' + "</tr>"
+		//console.log(str)
+		$('tbody').html(str)
+	}else {
+		$('#errmsg').html("fail")
+	}
+})
+$('#loginbtn').on('click',function(){
+        var str = $('#loginForm').serialize()
+        console.log(str)
+        $.post('/add',str,function(data){
+                console.log(data)
+                data = JSON.parse(data)
+                console.log(data)
+                if (data['code'] == 0){
+                        alert(data['result']['name'])
+                }else{
+                        alert('Wrong')
+                }
+        })
+        return  false 
+
+})
+</script>
+</html>
