@@ -1,0 +1,30 @@
+<html>
+<p>userlist</p>
+<div stype = "color:red">
+<a href = "/loginout"> 注销</a>
+</div>
+<table border='1px'>
+	<thead>
+	<tr><th>Name</th>
+	<th>Name_CN</th>
+	<th>Email</th>
+	<th>Mobile</th>
+	<th>Role</th>
+	<th>Status</th>
+	<th>Create_Time</th>
+	<th>Operate></th></tr>
+	</thead>
+	<tbody>
+	{% for user in users %}
+	<tr><input type='hidden' name='id' value={{ user.id }}><td>{{ user.name}}</td>
+	<td>{{user.name_cn}}</td>
+	<td>{{user.email}}</td>
+	<td>{{user.mobile}}</td>
+	<td>{{user.role}}</td>
+	<td>{{user.status}}</td>
+	<td>{{user.create_time}}</td>
+	<td><a href='/user/update?id={{user.id}}'>更新</a>  <a href='/user/delete?id={{user.id}}'>删除</a></tr>
+	{% endfor %}
+	</tbody>
+</table>
+</html>
